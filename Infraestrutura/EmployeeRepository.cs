@@ -12,5 +12,9 @@ namespace PrimeiraAPI.Infraestrutura {
         public List<Employee> Get() {
             return _context.Employees.ToList();
         }
+
+        public Employee? Get(int id) {
+            return _context.Employees.Find(id);
+        }
     }
 }
