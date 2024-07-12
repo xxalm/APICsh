@@ -9,8 +9,8 @@ namespace PrimeiraAPI.Infraestrutura {
             _context.SaveChanges();
         }
 
-        public List<Employee> Get() {
-            return _context.Employees.ToList();
+        public List<Employee> Get(int pageNumber, int pageQuantity) {
+            return _context.Employees.Skip(pageNumber * pageQuantity).Take(pageQuantity).ToList();
         }
 
         public Employee? Get(int id) {
