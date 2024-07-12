@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PrimeiraAPI.Application.ViewModel;
-using PrimeiraAPI.Domain.Model;
+using PrimeiraAPI.Domain.DTOs;
+using PrimeiraAPI.Domain.Model.EmployeeAggregate;
 using PrimeiraAPI.Infraestrutura;
 
 namespace PrimeiraAPI.Controllers
@@ -12,10 +14,12 @@ namespace PrimeiraAPI.Controllers
 
         private readonly IEmplyeeRepository _employeeRepository;
         private readonly ILogger<EmployeeController> _logger;
+        private readonly IMapper _mapper;
 
-        public EmployeeController(IEmplyeeRepository employeeRepository, ILogger<EmployeeController> logger) {
+        public EmployeeController(IEmplyeeRepository employeeRepository, ILogger<EmployeeController> logger, IMapper mapper) {
             _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [Authorize]
@@ -42,9 +46,17 @@ namespace PrimeiraAPI.Controllers
 
         [HttpGet]
 
-        //Os log's nesse caso são somente para fins de aprendizado
+        
         public IActionResult Get(int pageNumber, int pageQuantity) {
             var employees = _employeeRepository.Get(pageNumber, pageQuantity);
+            return Ok(employees);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult Get(int id) {
+            var employees = _employeeRepository.Get(id);
+            var employeesDTOS = _mapper.Map<EmployeeDTO>(employees);
             return Ok(employees);
         }
     }
