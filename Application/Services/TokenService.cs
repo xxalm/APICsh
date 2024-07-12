@@ -1,16 +1,20 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using PrimeiraAPI.Model;
+using PrimeiraAPI.Domain.Model;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PrimeiraAPI.Services {
-    public class TokenService {
-        public static object GenerateToken(Employee employee) {
+namespace PrimeiraAPI.Application.Services
+{
+    public class TokenService
+    {
+        public static object GenerateToken(Employee employee)
+        {
 
             var key = Encoding.ASCII.GetBytes(Key.Secret);
-            var tokenConfig = new SecurityTokenDescriptor {
-                Subject = new System.Security.Claims.ClaimsIdentity(new Claim[] {
+            var tokenConfig = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[] {
                     new Claim("employeeId", employee.id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(3),
@@ -21,7 +25,8 @@ namespace PrimeiraAPI.Services {
             var token = tokenHandler.CreateToken(tokenConfig);
             var tokenString = tokenHandler.WriteToken(token);
 
-            return new {
+            return new
+            {
                 token = tokenString,
             };
         }

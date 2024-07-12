@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PrimeiraAPI.Application.ViewModel;
+using PrimeiraAPI.Domain.Model;
 using PrimeiraAPI.Infraestrutura;
-using PrimeiraAPI.Model;
-using PrimeiraAPI.ViewModel;
 
-namespace PrimeiraAPI.Controllers {
+namespace PrimeiraAPI.Controllers
+{
     [ApiController]
     [Route("api/v1/employee")]
     public class EmployeeController : ControllerBase {
@@ -43,12 +44,7 @@ namespace PrimeiraAPI.Controllers {
 
         //Os log's nesse caso são somente para fins de aprendizado
         public IActionResult Get(int pageNumber, int pageQuantity) {
-            _logger.Log(LogLevel.Error, "Erro");
-
-            throw new Exception("Erro de teste");
-
             var employees = _employeeRepository.Get(pageNumber, pageQuantity);
-            _logger.LogInformation("Teste");
             return Ok(employees);
         }
     }

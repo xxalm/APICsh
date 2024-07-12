@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using PrimeiraAPI.Infraestrutura;
-using PrimeiraAPI.Model;
+using PrimeiraAPI.Domain.Model;
+using PrimeiraAPI.Infraestrutura.Repositories;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text;
 

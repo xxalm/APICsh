@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PrimeiraAPI.Model;
+using PrimeiraAPI.Domain.Model;
 
-namespace PrimeiraAPI.Infraestrutura {
+namespace PrimeiraAPI.Infraestrutura
+{
     public class ConnectionContext : DbContext {
         public DbSet<Employee> Employees { get; set; }
 
