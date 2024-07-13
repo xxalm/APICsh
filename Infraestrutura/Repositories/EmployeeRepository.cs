@@ -3,7 +3,7 @@ using PrimeiraAPI.Domain.Model.EmployeeAggregate;
 
 namespace PrimeiraAPI.Infraestrutura.Repositories
 {
-    public class EmployeeRepository : IEmplyeeRepository {
+    public class EmployeeRepository : IEmployeeRepository {
 
         private readonly ConnectionContext _context = new ConnectionContext();
         public void Add(Employee employee)

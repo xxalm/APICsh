@@ -14,11 +14,11 @@ namespace PrimeiraAPI.Controllers.v2
     public class EmployeeController : ControllerBase
     {
 
-        private readonly IEmplyeeRepository _employeeRepository;
+        private readonly IEmployeeRepository _employeeRepository;
         private readonly ILogger<EmployeeController> _logger;
         private readonly IMapper _mapper;
 
-        public EmployeeController(IEmplyeeRepository employeeRepository, ILogger<EmployeeController> logger, IMapper mapper)
+        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger, IMapper mapper)
         {
             _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

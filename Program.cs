@@ -72,8 +72,18 @@ builder.Services.AddSwaggerGen(c => {
 
 });
 
-builder.Services.AddTransient<IEmplyeeRepository, EmployeeRepository>();
+builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerGenOptions>();
+
+
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: "MyPolicy",
+        policy => {
+            policy.WithOrigins("http://localhost8080", "https://localhost8080")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
 
 
 var key = Encoding.ASCII.GetBytes(PrimeiraAPI.Key.Secret);
@@ -109,6 +119,8 @@ if (app.Environment.IsDevelopment()) {
 } else {
     app.UseExceptionHandler("/error");
 }
+
+app.UseCors("MyPolicy");
 
 app.UseHttpsRedirection();
 

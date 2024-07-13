@@ -2,7 +2,7 @@
 
 namespace PrimeiraAPI.Domain.Model.EmployeeAggregate
 {
-    public interface IEmplyeeRepository
+    public interface IEmployeeRepository
     {
         void Add(Employee employee);
 
